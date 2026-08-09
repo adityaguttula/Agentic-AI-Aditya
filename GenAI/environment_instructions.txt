@@ -1,0 +1,56 @@
+
+##Create virtual environment in vscode terminal
+#Download vscode and python 3.12
+py -3.12 -m venv .venv (for local)
+.\.venv\Scripts\activate (for local)
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+
+#Create virtual environment in GCP Cloud Shell and MAC
+python3.12 -m venv .venv (for GCP Cloud Shell)
+source .venv/bin/activate (for GCP Cloud Shell)
+
+## UV Install 
+pip intall uv
+uv init --bare
+
+## Library to install
+uv add numpy
+uv add pandas
+uv add python-dotenv==1.1.1
+uv add langchain==0.3.27
+uv add langchain-google-vertexai>=2.0.12
+uv add streamlit
+
+# To run streamlit in Google Cloud Shell
+streamlit run 2.llm_with_ui.py \
+--server.port 8080 \
+--server.address 0.0.0.0 \
+--server.enableCORS=false \
+--server.enableXsrfProtection=false \
+--server.enableWebsocketCompression=false
+
+## Configure GCP in vscode terminal
+https://docs.cloud.google.com/sdk/docs/install-sdk
+gcloud auth login
+gcloud auth application-default login
+gcloud config set project YOUR_PROJECT_ID
+# Enable Vertex AI api
+gcloud services enable aiplatform.googleapis.com --project=YOUR_PROJECT_ID
+
+
+## Langchain cloud agnostic framework
+cd .\
+
+## GCP Document to check available models
+https://ai.google.dev/gemini-api/docs/models
+
+
+## Library to read pdf
+uv add pymupdf==1.25.3 # fitz — PDF text extraction
+
+# RAG Libraries
+uv add langchain-community==0.3.27 # FAISS vectorstore integration (match langchain version)
+uv add faiss-cpu==1.11.0  # FAISS vector similarity search
+uv add langchain-text-splitters==0.3.9 # RecursiveCharacterTextSplitter
+uv add langchain-experimental # ---> To test semantic chunking splitter
+uv add tiktoken ---> To test TokenTextSplitter

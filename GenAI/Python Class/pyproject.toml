@@ -1,0 +1,13 @@
+[project]
+name = "aibees-6-classes"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain==0.3.27",
+    "langchain-google-vertexai>=2.0.12",
+    "numpy>=2.5.1",
+    "pandas>=3.0.3",
+    "pymupdf==1.25.3",
+    "python-dotenv==1.1.1",
+    "streamlit>=1.59.2",
+]
